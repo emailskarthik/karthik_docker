@@ -11,11 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Log in to Docker Hub
-        uses: https://login.docker.com/u/login/identifier?state=hKFo2SBnbUphQWlQYXpyRGJHS1BORjRuU0phcXByajVsRVlxX6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGxkTWthOTVad3VLLS1VYU5SSURhWG5yS0g5WWNRNFJno2NpZNkgbHZlOUdHbDhKdFNVcm5lUTFFVnVDMGxiakhkaTluYjk
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login to docker
+        run: docker login --username '${{secrets.DOCKER_LOGIN}}' --password '${{secrets.DOCKER_PASSWORD}}'
 
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/karthik_docker
